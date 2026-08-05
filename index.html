@@ -2,7 +2,8 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Password Card – Version jolie</title>
+  <title>Password Card – Nouvelle version</title>
+
   <style>
     :root {
       --card-width: 85.6mm;
@@ -18,9 +19,7 @@
       --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -84,8 +83,32 @@
       box-shadow: none;
     }
 
-    .toolbar button:hover {
-      filter: brightness(1.05);
+    .toolbar button:hover { filter: brightness(1.05); }
+
+    /* ZOOM écran pour éviter la carte minuscule */
+    @media screen {
+      .password-card {
+        transform: scale(2.2);
+        transform-origin: top left;
+      }
+      .card-wrapper {
+        width: calc(var(--card-width) * 2.2);
+        height: calc(var(--card-height) * 2.2);
+      }
+    }
+
+    /* Impression : taille réelle */
+    @media print {
+      body { background: #ffffff; padding: 0; }
+      .toolbar, .subtitle, h1 { display: none; }
+      .password-card { transform: none !important; }
+      .card-wrapper {
+        width: var(--card-width);
+        height: var(--card-height);
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+      }
     }
 
     .card-wrapper {
@@ -153,9 +176,7 @@
       position: relative;
     }
 
-    .cell:nth-child(odd) {
-      background: #fdfdfd;
-    }
+    .cell:nth-child(odd) { background: #fdfdfd; }
 
     .cell-label {
       position: absolute;
@@ -211,38 +232,19 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
-
-    @media print {
-      body {
-        background: #ffffff;
-        padding: 0;
-      }
-      .toolbar, .subtitle, h1 {
-        display: none;
-      }
-      .card-wrapper {
-        box-shadow: none;
-        padding: 0;
-        margin: 0;
-      }
-    }
   </style>
 </head>
+
 <body>
   <h1>Password Card</h1>
   <div class="subtitle">
-    Carte de mots de passe imprimable. Choisis une règle (couleur + position) et transforme ton mot de passe
-    mémorisable en mot de passe robuste.
+    Carte de mots de passe imprimable. Choisis une règle (couleur + position) et transforme ton mot de passe mémorisable en mot de passe robuste.
   </div>
 
   <div class="toolbar">
     <input type="text" id="seedInput" placeholder="Seed (ex: change me 😄)" />
-    <button id="generateBtn">
-      🔁 <span>Régénérer la carte</span>
-    </button>
-    <button id="printBtn" class="secondary">
-      🖨️ <span>Imprimer la carte</span>
-    </button>
+    <button id="generateBtn">🔁 Régénérer</button>
+    <button id="printBtn" class="secondary">🖨️ Imprimer</button>
   </div>
 
   <div class="card-wrapper">
@@ -336,7 +338,6 @@
       window.print();
     });
 
-    // initial render
     seedInputEl.value = defaultSeed;
     generateCard(defaultSeed);
   </script>
