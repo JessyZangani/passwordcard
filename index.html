@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Password Card – Jessy</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f5f7fa;
+        margin: 0;
+        padding: 20px;
+        text-align: center;
+    }
+
+    h1 {
+        color: #0066ff;
+        margin-bottom: 10px;
+    }
+
+    .card {
+        display: inline-block;
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        margin-top: 20px;
+    }
+
+    table {
+        border-collapse: collapse;
+        margin: auto;
+    }
+
+    td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        width: 25px;
+        height: 25px;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .btn {
+        margin-top: 20px;
+        padding: 12px 20px;
+        background: #0066ff;
+        color: white;
+        border-radius: 8px;
+        text-decoration: none;
+        cursor: pointer;
+        display: inline-block;
+        transition: 0.2s;
+    }
+
+    .btn:hover {
+        background: #004fcc;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Carte de mots de passe</h1>
+<p>Génère une carte remplie de caractères aléatoires pour créer des mots de passe sécurisés.</p>
+
+<div class="card">
+    <table id="passwordCard"></table>
+</div>
+
+<div>
+    <a class="btn" onclick="generateCard()">Régénérer la carte</a>
+</div>
+
+<script>
+    function generateCard() {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&?";
+        const rows = 10;
+        const cols = 20;
+        const table = document.getElementById("passwordCard");
+        table.innerHTML = "";
+
+        for (let r = 0; r < rows; r++) {
+            let row = document.createElement("tr");
+            for (let c = 0; c < cols; c++) {
+                let cell = document.createElement("td");
+                cell.textContent = chars[Math.floor(Math.random() * chars.length)];
+                row.appendChild(cell);
+            }
+            table.appendChild(row);
+        }
+    }
+
+    generateCard();
+</script>
+
+</body>
+</html>
