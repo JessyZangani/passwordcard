@@ -1,99 +1,344 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Password Card – Jessy</title>
+  <meta charset="UTF-8">
+  <title>Password Card – Version jolie</title>
+  <style>
+    :root {
+      --card-width: 85.6mm;
+      --card-height: 54mm;
+      --card-radius: 4mm;
+      --bg: #f5f5f7;
+      --card-bg: #ffffff;
+      --border: #d0d0dd;
+      --text: #222;
+      --accent: #3b82f6;
+      --accent-soft: #e0edff;
+      --grid-border: #e2e2ee;
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
 
-<style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-        font-family: Arial, sans-serif;
-        background: #f5f7fa;
-        margin: 0;
-        padding: 20px;
-        text-align: center;
+      margin: 0;
+      padding: 20px;
+      background: radial-gradient(circle at top, #e0e7ff 0, #f5f5f7 40%, #ffffff 100%);
+      font-family: var(--font-main);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
     }
 
     h1 {
-        color: #0066ff;
-        margin-bottom: 10px;
+      font-size: 1.4rem;
+      margin: 0 0 4px;
+      letter-spacing: 0.03em;
     }
 
-    .card {
-        display: inline-block;
-        background: white;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        margin-top: 20px;
+    .subtitle {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 12px;
+      text-align: center;
+      max-width: 520px;
     }
 
-    table {
-        border-collapse: collapse;
-        margin: auto;
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 8px;
     }
 
-    td {
-        border: 1px solid #ccc;
-        padding: 8px;
-        width: 25px;
-        height: 25px;
-        font-size: 18px;
-        text-align: center;
+    .toolbar input[type="text"] {
+      padding: 6px 8px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      min-width: 220px;
+      font-size: 0.9rem;
     }
 
-    .btn {
-        margin-top: 20px;
-        padding: 12px 20px;
-        background: #0066ff;
-        color: white;
-        border-radius: 8px;
-        text-decoration: none;
-        cursor: pointer;
-        display: inline-block;
-        transition: 0.2s;
+    .toolbar button {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.18);
     }
 
-    .btn:hover {
-        background: #004fcc;
+    .toolbar button.secondary {
+      background: #e5e7eb;
+      color: #111827;
+      box-shadow: none;
     }
-</style>
+
+    .toolbar button:hover {
+      filter: brightness(1.05);
+    }
+
+    .card-wrapper {
+      background: var(--bg);
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+    }
+
+    .password-card {
+      width: var(--card-width);
+      height: var(--card-height);
+      background: var(--card-bg);
+      border-radius: var(--card-radius);
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      font-size: 9px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+
+    .card-title {
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 8px;
+    }
+
+    .card-tag {
+      font-size: 7px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid #c7d2fe;
+    }
+
+    .grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(16, 1fr);
+      grid-auto-rows: 10px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--grid-border);
+      background: #fafafa;
+    }
+
+    .cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid #f0f0f5;
+      border-bottom: 1px solid #f0f0f5;
+      font-size: 7px;
+      position: relative;
+    }
+
+    .cell:nth-child(odd) {
+      background: #fdfdfd;
+    }
+
+    .cell-label {
+      position: absolute;
+      top: 0;
+      left: 1px;
+      font-size: 5px;
+      color: #9ca3af;
+    }
+
+    .cell-color-dot {
+      position: absolute;
+      bottom: 1px;
+      right: 1px;
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: #e5e7eb;
+    }
+
+    .cell.color-a .cell-color-dot { background: #f97316; }
+    .cell.color-b .cell-color-dot { background: #22c55e; }
+    .cell.color-c .cell-color-dot { background: #3b82f6; }
+    .cell.color-d .cell-color-dot { background: #a855f7; }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 4px;
+      font-size: 7px;
+      color: #6b7280;
+    }
+
+    .seed-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .seed-info span.code {
+      font-family: "SF Mono", Menlo, Consolas, monospace;
+      font-size: 7px;
+      color: #374151;
+    }
+
+    .brand {
+      text-align: right;
+      font-size: 6px;
+    }
+
+    .brand span {
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+        padding: 0;
+      }
+      .toolbar, .subtitle, h1 {
+        display: none;
+      }
+      .card-wrapper {
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <h1>Password Card</h1>
+  <div class="subtitle">
+    Carte de mots de passe imprimable. Choisis une règle (couleur + position) et transforme ton mot de passe
+    mémorisable en mot de passe robuste.
+  </div>
 
-<h1>Carte de mots de passe</h1>
-<p>Génère une carte remplie de caractères aléatoires pour créer des mots de passe sécurisés.</p>
+  <div class="toolbar">
+    <input type="text" id="seedInput" placeholder="Seed (ex: change me 😄)" />
+    <button id="generateBtn">
+      🔁 <span>Régénérer la carte</span>
+    </button>
+    <button id="printBtn" class="secondary">
+      🖨️ <span>Imprimer la carte</span>
+    </button>
+  </div>
 
-<div class="card">
-    <table id="passwordCard"></table>
-</div>
+  <div class="card-wrapper">
+    <div class="password-card" id="passwordCard">
+      <div class="card-header">
+        <div class="card-title">PASSWORD CARD</div>
+        <div class="card-tag">offline • personal</div>
+      </div>
 
-<div>
-    <a class="btn" onclick="generateCard()">Régénérer la carte</a>
-</div>
+      <div class="grid" id="grid"></div>
 
-<script>
-    function generateCard() {
-        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&?";
-        const rows = 10;
-        const cols = 20;
-        const table = document.getElementById("passwordCard");
-        table.innerHTML = "";
+      <div class="card-footer">
+        <div class="seed-info">
+          <span>Seed & jeu de caractères</span>
+          <span class="code" id="seedInfo"></span>
+        </div>
+        <div class="brand">
+          <span>PASSCARD</span><br>
+          v1.0 • local only
+        </div>
+      </div>
+    </div>
+  </div>
 
-        for (let r = 0; r < rows; r++) {
-            let row = document.createElement("tr");
-            for (let c = 0; c < cols; c++) {
-                let cell = document.createElement("td");
-                cell.textContent = chars[Math.floor(Math.random() * chars.length)];
-                row.appendChild(cell);
-            }
-            table.appendChild(row);
-        }
+  <script>
+    const defaultSeed = "change me 😄";
+    const outputSet =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.;:!?-*%/&'\"#()";
+
+    const gridEl = document.getElementById("grid");
+    const seedInfoEl = document.getElementById("seedInfo");
+    const seedInputEl = document.getElementById("seedInput");
+    const generateBtn = document.getElementById("generateBtn");
+    const printBtn = document.getElementById("printBtn");
+
+    function pseudoRandom(seed) {
+      let h = 0;
+      for (let i = 0; i < seed.length; i++) {
+        h = (h * 31 + seed.charCodeAt(i)) >>> 0;
+      }
+      return function () {
+        h ^= h << 13;
+        h ^= h >>> 17;
+        h ^= h << 5;
+        return (h >>> 0) / 4294967295;
+      };
     }
 
-    generateCard();
-</script>
+    function generateCard(seed) {
+      const prng = pseudoRandom(seed || defaultSeed);
+      gridEl.innerHTML = "";
 
+      const rows = 10;
+      const cols = 16;
+      const colors = ["color-a", "color-b", "color-c", "color-d"];
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const idx = Math.floor(prng() * outputSet.length);
+          const ch = outputSet[idx];
+
+          const cell = document.createElement("div");
+          cell.className = "cell " + colors[Math.floor(prng() * colors.length)];
+
+          const label = document.createElement("span");
+          label.className = "cell-label";
+          label.textContent = String.fromCharCode(65 + r) + (c + 1);
+
+          const dot = document.createElement("span");
+          dot.className = "cell-color-dot";
+
+          const content = document.createElement("span");
+          content.textContent = ch;
+
+          cell.appendChild(label);
+          cell.appendChild(dot);
+          cell.appendChild(content);
+          gridEl.appendChild(cell);
+        }
+      }
+
+      seedInfoEl.textContent = `seed="${seed || defaultSeed}" • set="${outputSet}"`;
+    }
+
+    generateBtn.addEventListener("click", () => {
+      const seed = seedInputEl.value.trim() || defaultSeed;
+      generateCard(seed);
+    });
+
+    printBtn.addEventListener("click", () => {
+      window.print();
+    });
+
+    // initial render
+    seedInputEl.value = defaultSeed;
+    generateCard(defaultSeed);
+  </script>
 </body>
 </html>
