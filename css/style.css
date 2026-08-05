@@ -1,0 +1,424 @@
+/* ============================================================
+   Password Card – Feuille de style principale
+   ============================================================ */
+
+/* ─── Variables ─────────────────────────────────────────── */
+:root {
+  --bg:         #0d1117;
+  --surface:    #161b22;
+  --surface2:   #21262d;
+  --border:     #30363d;
+  --accent:     #58a6ff;
+  --accent2:    #3fb950;
+  --danger:     #f85149;
+  --text:       #e6edf3;
+  --text-muted: #8b949e;
+  --shadow:     0 8px 32px rgba(0, 0, 0, .5);
+  --radius:     14px;
+
+  /* 10 couleurs distinctes par colonne */
+  --col-0: #ff7b72;
+  --col-1: #ffa657;
+  --col-2: #e3b341;
+  --col-3: #3fb950;
+  --col-4: #58a6ff;
+  --col-5: #bc8cff;
+  --col-6: #ff7bbb;
+  --col-7: #79c0ff;
+  --col-8: #56d364;
+  --col-9: #d2a8ff;
+}
+
+/* ─── Reset ──────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── Base ───────────────────────────────────────────────── */
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 24px 16px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ─── Header ─────────────────────────────────────────────── */
+header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(88, 166, 255, .12);
+  border: 1px solid rgba(88, 166, 255, .3);
+  border-radius: 99px;
+  padding: 4px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: .05em;
+  margin-bottom: 16px;
+}
+
+h1 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent), #bc8cff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: .92rem;
+  max-width: 520px;
+  line-height: 1.6;
+}
+
+/* ─── Controls ───────────────────────────────────────────── */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  margin-bottom: 28px;
+  width: 100%;
+  max-width: 820px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.control-group > label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.control-group select {
+  appearance: none;
+  background: var(--surface2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b949e' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 10px center;
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 8px 32px 8px 12px;
+  font-family: inherit;
+  font-size: .88rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color .2s;
+  min-width: 160px;
+}
+
+.control-group select:hover,
+.control-group select:focus { border-color: var(--accent); }
+
+/* ─── Chip / Toggle ──────────────────────────────────────── */
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 7px 13px;
+  font-size: .84rem;
+  cursor: pointer;
+  transition: border-color .2s, background .2s, color .2s;
+  user-select: none;
+}
+
+.chip:hover { border-color: var(--accent); }
+
+.chip.active {
+  border-color: var(--accent2);
+  background: rgba(63, 185, 80, .1);
+  color: var(--accent2);
+}
+
+.chip input { display: none; }
+
+/* ─── Action buttons ─────────────────────────────────────── */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s, background .2s, border-color .2s, color .2s;
+  outline: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), #1e90ff);
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(88, 166, 255, .35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(88, 166, 255, .55);
+}
+
+.btn-ghost {
+  background: var(--surface2);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ─── Card wrapper ───────────────────────────────────────── */
+.card-wrapper {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+/* ─── Password Table ─────────────────────────────────────── */
+#passwordCard {
+  border-collapse: collapse;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px;
+  table-layout: fixed;
+  margin: auto;
+}
+
+#passwordCard th,
+#passwordCard td {
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid var(--border);
+  transition: background .15s, transform .12s;
+}
+
+/* Row number header */
+#passwordCard th.row-header {
+  width: 24px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  border: none;
+  background: transparent;
+  padding-right: 6px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Column letter header */
+#passwordCard th.col-header {
+  font-size: 11px;
+  font-weight: 700;
+  border: none;
+  background: transparent;
+  padding-bottom: 6px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Data cells */
+#passwordCard td {
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#passwordCard td:hover {
+  transform: scale(1.18);
+  z-index: 2;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .4);
+}
+
+#passwordCard td.highlighted {
+  background: rgba(88, 166, 255, .22) !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 2px rgba(88, 166, 255, .45);
+}
+
+/* ─── Column color coding ────────────────────────────────── */
+#passwordCard .col-0 { color: var(--col-0); }
+#passwordCard .col-1 { color: var(--col-1); }
+#passwordCard .col-2 { color: var(--col-2); }
+#passwordCard .col-3 { color: var(--col-3); }
+#passwordCard .col-4 { color: var(--col-4); }
+#passwordCard .col-5 { color: var(--col-5); }
+#passwordCard .col-6 { color: var(--col-6); }
+#passwordCard .col-7 { color: var(--col-7); }
+#passwordCard .col-8 { color: var(--col-8); }
+#passwordCard .col-9 { color: var(--col-9); }
+
+/* ─── Info bar ───────────────────────────────────────────── */
+.info-bar {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  min-height: 44px;
+}
+
+.selected-count {
+  font-size: .78rem;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.selected-display {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .9rem;
+  color: var(--accent);
+  word-break: break-all;
+  letter-spacing: .04em;
+  min-height: 22px;
+}
+
+/* ─── Legend ─────────────────────────────────────────────── */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+  font-size: .78rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-muted);
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ─── Toast notification ─────────────────────────────────── */
+#toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-size: .88rem;
+  box-shadow: var(--shadow);
+  transition: transform .3s cubic-bezier(.34, 1.56, .64, 1), opacity .3s;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 999;
+}
+
+#toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ─── Animations ─────────────────────────────────────────── */
+@keyframes fadeInCell {
+  from { opacity: 0; transform: scale(.6); }
+  to   { opacity: 1; transform: scale(1);  }
+}
+
+.animate-in {
+  animation: fadeInCell .3s ease both;
+}
+
+/* ─── Print ──────────────────────────────────────────────── */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    padding: 0;
+  }
+
+  .controls, .actions, .info-bar, .legend, #toast, header {
+    display: none !important;
+  }
+
+  .card-wrapper {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    padding: 8px;
+  }
+
+  #passwordCard {
+    font-size: 11px;
+  }
+
+  #passwordCard th,
+  #passwordCard td {
+    width: 22px;
+    height: 22px;
+    border-color: #ccc !important;
+  }
+
+  /* Couleurs imprimables (contrastées sur fond blanc) */
+  #passwordCard .col-0 { color: #c0392b !important; }
+  #passwordCard .col-1 { color: #e67e22 !important; }
+  #passwordCard .col-2 { color: #d4ac0d !important; }
+  #passwordCard .col-3 { color: #1e8449 !important; }
+  #passwordCard .col-4 { color: #1a5276 !important; }
+  #passwordCard .col-5 { color: #6c3483 !important; }
+  #passwordCard .col-6 { color: #943126 !important; }
+  #passwordCard .col-7 { color: #154360 !important; }
+  #passwordCard .col-8 { color: #1d6a39 !important; }
+  #passwordCard .col-9 { color: #4a235a !important; }
+
+  #passwordCard th.row-header { color: #666 !important; }
+
+  #passwordCard td.highlighted {
+    background: #e8f4fd !important;
+    border-color: #2980b9 !important;
+  }
+}
