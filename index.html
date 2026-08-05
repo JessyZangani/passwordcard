@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Card - Generateur Securise</title>
+  <meta name="description" content="Generez une carte de mots de passe securises avec des caracteres aleatoires, imprimable et personnalisable.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Feuille de style -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="badge">Generateur de Password Card</div>
+    <h1>Libérez votre esprit !</h1>
+    <p class="subtitle">
+      Genere une carte de caracteres aleatoires securisee.
+      Selectionnez les cellules pour construire vos mots de passe, puis imprimez ou copiez.
+    </p>
+  </header>
+
+  <!-- Panneau de configuration -->
+  <div class="controls">
+
+    <div class="control-group">
+      <label for="sizeSelect">Taille de la carte</label>
+      <select id="sizeSelect">
+        <option value="8x10">8 x 10  (compact)</option>
+        <option value="10x20" selected>10 x 20  (standard)</option>
+        <option value="12x26">12 x 26  (large)</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <label>Caracteres inclus</label>
+      <div class="checkbox-group" id="charsetToggles">
+        <label class="chip active" id="chip-upper">
+          <input type="checkbox" checked> A-Z
+        </label>
+        <label class="chip active" id="chip-lower">
+          <input type="checkbox" checked> a-z
+        </label>
+        <label class="chip active" id="chip-digits">
+          <input type="checkbox" checked> 0-9
+        </label>
+        <label class="chip active" id="chip-special">
+          <input type="checkbox" checked> !@#...
+        </label>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Barre d'actions -->
+  <div class="actions">
+
+    <button class="btn btn-primary" id="btn-generate" onclick="generateCard()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+        <polyline points="23 4 23 10 17 10"/>
+        <polyline points="1 20 1 14 7 14"/>
+        <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+      </svg>
+      Regenerer
+    </button>
+
+    <button class="btn btn-ghost" id="btn-clear" onclick="clearHighlight()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M3 6h18M19 6l-1 14H6L5 6M10 11v6M14 11v6M8 6V4a1 1 0 011-1h6a1 1 0 011 1v2"/>
+      </svg>
+      Effacer selection
+    </button>
+
+    <button class="btn btn-ghost" id="btn-copy" onclick="copySelected()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <rect x="9" y="9" width="13" height="13" rx="2"/>
+        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
+      </svg>
+      Copier le mot de passe
+    </button>
+
+    <button class="btn btn-ghost" id="btn-print" onclick="window.print()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <polyline points="6 9 6 2 18 2 18 9"/>
+        <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/>
+        <rect x="6" y="14" width="12" height="8"/>
+      </svg>
+      Imprimer
+    </button>
+
+  </div>
+
+  <!-- Carte + info selection -->
+  <div class="card-wrapper">
+    <table id="passwordCard" aria-label="Carte de mots de passe"></table>
+
+    <div class="info-bar">
+      <div>
+        <div class="selected-count" id="selectedCount">
+          Cliquez sur les cellules pour construire votre mot de passe
+        </div>
+        <div class="selected-display" id="selectedDisplay"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legende des couleurs -->
+  <div class="legend" id="legend" aria-label="Legende des colonnes"></div>
+
+  <!-- Toast de notification -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-name">ZANGANI Jessy</span>
+      <span class="footer-sep">·</span>
+      <span class="footer-note">Projet personnel · Genere avec l'aide de l'IA</span>
+    </div>
+  </footer>
+
+  <!-- Script principal -->
+  <script src="js/app.js"></script>
+
+</body>
+</html>
