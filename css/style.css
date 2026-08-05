@@ -374,45 +374,6 @@ h1 {
   animation: fadeInCell .3s ease both;
 }
 
-/* ─── Footer ────────────────────────────────────────────── */
-.site-footer {
-  width: 100%;
-  margin-top: 48px;
-  padding: 20px 16px;
-  border-top: 1px solid var(--border);
-  text-align: center;
-}
-
-.footer-inner {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: .82rem;
-  color: var(--text-muted);
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.footer-name {
-  font-weight: 700;
-  font-size: .9rem;
-  background: linear-gradient(135deg, var(--accent), #bc8cff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: .02em;
-}
-
-.footer-sep {
-  color: var(--border);
-  font-size: 1rem;
-}
-
-.footer-note {
-  color: var(--text-muted);
-  font-style: italic;
-}
-
 /* ─── Print ──────────────────────────────────────────────── */
 @media print {
   body {
@@ -421,7 +382,7 @@ h1 {
     padding: 0;
   }
 
-  .controls, .actions, .info-bar, .legend, #toast, header, .site-footer {
+  .controls, .actions, .info-bar, .legend, #toast, header {
     display: none !important;
   }
 
